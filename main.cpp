@@ -6,6 +6,7 @@
 #include "heuristics.h"
 #include "greedy_search.h"
 #include "a_search.h"
+#include "hill_climbing.h"
 
 
 using namespace std;
@@ -53,24 +54,19 @@ int main() {
 
         writeMap(matrix, output1);
         output1 << "start: (" << start.first << ", " << start.second << ")   finish: (" << finish.first << ", " << finish.second << ")" << endl << endl;
-/*
-         subidaEncostaGulosa(matrix, start, finish, distEuclid, output1);
+
+        subidaEncostaGulosa(matrix, start, finish, distEuclid, output1);
         subidaEncostaGulosa(matrix, start, finish, distMan, output1);
         subidaEncostaMaiorAclive(matrix, start, finish, distEuclid, output1);
         subidaEncostaMaiorAclive(matrix, start, finish, distMan, output1);
         subidaEncostaEstocastico(matrix, start, finish, distEuclid, output1);
         subidaEncostaEstocastico(matrix, start, finish, distMan, output1); 
-*/
-        buscaGulosa(matrix, start, finish, distEuclid, output1);
-        buscaGulosa(matrix, start, finish, distMan, output1);
-        aStar(matrix, start, finish, distEuclid, output1);
-        aStar(matrix, start, finish, distMan, output1);
     }
 
     output1.close();
 
-/*
-     ofstream output2("q2_output.txt");
+
+    ofstream output2("q2_output.txt");
     if(!output2.is_open()) {
         cout << "Falha em abrir o arquivo" << endl;
         return 1;
@@ -103,7 +99,10 @@ int main() {
 
         writeMap(matrix, output2);
         output2 << "start: (" << start.first << ", " << start.second << ")   finish: (" << finish.first << ", " << finish.second << ")" << endl << endl;
-        
+        buscaGulosa(matrix, start, finish, distEuclid, output2);
+        buscaGulosa(matrix, start, finish, distMan, output2);
+        aStar(matrix, start, finish, distEuclid, output2);
+        aStar(matrix, start, finish, distMan, output2);
     }
 
     output2.close();
@@ -144,12 +143,15 @@ int main() {
 
         writeMap(matrix, output3);
         output3 << "start: (" << start.first << ", " << start.second << ")   finish: (" << finish.first << ", " << finish.second << ")" << endl << endl;
-        
+        weightedAStar(matrix, start, finish, distEuclid, 1, output3);
+        weightedAStar(matrix, start, finish, distEuclid, 3, output3);
+        weightedAStar(matrix, start, finish, distEuclid, 6, output3);
+        weightedAStar(matrix, start, finish, distMan, 1, output3);
+        weightedAStar(matrix, start, finish, distMan, 3, output3);
+        weightedAStar(matrix, start, finish, distMan, 6, output3);
     }
 
     output3.close();
-
-    obstacles = 10;
 
     ofstream output4("q4_output.txt");
     if(!output4.is_open()) {
@@ -158,8 +160,8 @@ int main() {
     }
 
 
-    for(int o = 0; o < 4; o++) {
-        obstacles = round(225*(obstacles+(10*o)/100));
+    for(int o = 1; o <= 4; o++) {
+        obstacles = round(225*0.1*o);
         for(int i = 0; i < 20; i++) {
 
             pair<int,int> start;
@@ -186,10 +188,13 @@ int main() {
             } while(!isSolvable(matrix, start, finish));
 
             writeMap(matrix, output4);
-            output4 << "start: (" << start.first << ", " << start.second << ")   finish: (" << finish.first << ", " << finish.second << ")" << endl << endl;
-        
+            output4 << "start: (" << start.first << ", " << start.second << ")   finish: (" << finish.first << ", " << finish.second << ")" << "  obstacle percentage: " << (o*10) << "%" << endl << endl;
+
+            subidaEncostaMaiorAclive(matrix, start, finish, distMan, output4);
+            buscaGulosa(matrix, start, finish, distMan, output4);
+            aStar(matrix, start, finish, distMan, output4);
         }
     }
- */
+
     return 0;
 }

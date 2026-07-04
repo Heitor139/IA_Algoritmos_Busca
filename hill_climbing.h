@@ -99,6 +99,7 @@ void subidaEncostaMaiorAclive(vector<vector<int>> matrix, pair<int, int> start, 
             }
         }
 
+        if(melhorId == -1) break;
         fila.push(vizinhos[melhorId]);
         
 
@@ -145,6 +146,8 @@ void subidaEncostaEstocastico(vector<vector<int>> matrix, pair<int, int> start, 
             gerados += 1;
             vizinhos.push_back({fila.front().first, fila.front().second-1});
         }
+
+        if(vizinhos.empty()) break;
 
         random_device rand; 
         mt19937 g(rand()); 
