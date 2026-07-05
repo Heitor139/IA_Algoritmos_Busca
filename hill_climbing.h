@@ -53,9 +53,11 @@ void subidaEncostaGulosa(vector<vector<int>> matrix, pair<int, int> start, pair<
 }
 
 template <typename heuristic>
-void subidaEncostaMaiorAclive(vector<vector<int>> matrix, pair<int, int> start, pair<int, int> finish, heuristic compare, ofstream& output) {
+void subidaEncostaMaiorAclive(vector<vector<int>> matrix, pair<int, int> start, pair<int, int> finish, heuristic compare, ofstream& output,
+                              int& saida_gerados, int& saida_visitados, int& saida_custo, bool& saida_achou) {
     queue<pair<int,int>> fila;
     int custo = 0, gerados = 1, visitados = 0;
+    bool achou = false;
     fila.push(start);
     while(!fila.empty()) {
         double melhor = 100;
@@ -64,7 +66,10 @@ void subidaEncostaMaiorAclive(vector<vector<int>> matrix, pair<int, int> start, 
         custo += matrix[fila.front().first][fila.front().second];
         visitados += 1;
         matrix[fila.front().first][fila.front().second] = 1;
-        if(fila.front() == finish) break;
+        if(fila.front() == finish) {
+            achou = true;
+            break;
+        }
 
         if(fila.front().first - 1 > -1  && matrix[fila.front().first-1][fila.front().second] > 1) {
             gerados += 1;
@@ -105,6 +110,11 @@ void subidaEncostaMaiorAclive(vector<vector<int>> matrix, pair<int, int> start, 
 
         fila.pop();
     }
+
+    saida_gerados = gerados;
+    saida_visitados = visitados;
+    saida_custo = custo;
+    saida_achou = achou;
 
     writeMap(matrix, output);
     output << "Subida de encosta pelo maior aclive" << endl;
