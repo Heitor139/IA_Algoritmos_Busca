@@ -82,10 +82,7 @@ void buscaGulosa(vector<vector<int>> matrix, pair<int,int> start, pair<int,int> 
     if(achou) {
         pair<int,int> coordenada_atual = finish;
         while(coordenada_atual != make_pair(-1, -1)) {
-            // soma o custo do caminho encontrado, mas não soma o custo do estado inicial
-            if(coordenada_atual != start){
-                custo += custos[coordenada_atual.first][coordenada_atual.second];
-            }
+            custo += custos[coordenada_atual.first][coordenada_atual.second];
             coordenada_atual = caminho[coordenada_atual];
         }
     }

@@ -25,7 +25,7 @@ void aStar(vector<vector<int>> matrix, pair<int,int> start, pair<int,int> finish
     int custo = 0, gerados = 1, visitados = 0;
     bool achou = false;
 
-    g[start] = 0;
+    g[start] = custos[start.first][start.second];
     fila.push({g[start] + static_cast<double>(compare(start, finish)), {start, {-1, -1}}});
 
     while(!fila.empty()) {
@@ -118,8 +118,7 @@ void weightedAStar(vector<vector<int>> matrix, pair<int,int> start, pair<int,int
     int custo = 0, gerados = 1, visitados = 0;
     bool achou = false;
 
-
-    g[start] = 0;
+    g[start] = custos[start.first][start.second];
     fila.push({g[start] + static_cast<double>(compare(start, finish))*weight, {start, {-1, -1}}});
 
     while(!fila.empty()) {
