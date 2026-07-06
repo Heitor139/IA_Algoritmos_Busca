@@ -12,15 +12,20 @@
 using namespace std;
 
 template <typename heuristic>
-void subidaEncostaGulosa(vector<vector<int>> matrix, pair<int, int> start, pair<int, int> finish, heuristic compare, ofstream& output) {
+void subidaEncostaGulosa(vector<vector<int>> matrix, pair<int, int> start, pair<int, int> finish, heuristic compare, ofstream& output,
+                         int& saida_gerados, int& saida_visitados, int& saida_custo, bool& saida_achou) {
     queue<pair<int,int>> fila;
     int custo = 0, gerados = 1, visitados = 0;
+    bool achou = false;
     fila.push(start);
     while(!fila.empty()) {
         custo += matrix[fila.front().first][fila.front().second];
         visitados += 1;
         matrix[fila.front().first][fila.front().second] = 1;
-        if(fila.front() == finish) break;
+        if(fila.front() == finish) {
+            achou = true;
+            break;
+        }
 
         if(fila.front().first - 1 > -1 && compare(fila.front(), finish) > compare({fila.front().first-1, fila.front().second}, finish)  && matrix[fila.front().first-1][fila.front().second] > 1) {
             gerados += 1;
@@ -40,6 +45,12 @@ void subidaEncostaGulosa(vector<vector<int>> matrix, pair<int, int> start, pair<
         fila.pop();
     }
 
+    saida_gerados = gerados;
+    saida_visitados = visitados;
+    saida_custo = custo;
+    saida_achou = achou;
+
+    output << "===================================================================" << endl << endl;
     writeMap(matrix, output);
     output << "Subida de encosta gulosa" << endl;
     if constexpr (is_same_v<decltype(compare(start, finish)), double>) {
@@ -49,7 +60,7 @@ void subidaEncostaGulosa(vector<vector<int>> matrix, pair<int, int> start, pair<
     }
     output << "Estados gerados: " << gerados << endl;
     output << "Estados visitados: " << visitados << endl;
-    output << "Custo do caminho: " << custo << endl << endl; 
+    output << "Custo do caminho: " << custo << endl <<"==================================================================="<<endl << endl << endl << endl << endl; 
 }
 
 template <typename heuristic>
@@ -115,7 +126,8 @@ void subidaEncostaMaiorAclive(vector<vector<int>> matrix, pair<int, int> start, 
     saida_visitados = visitados;
     saida_custo = custo;
     saida_achou = achou;
-
+   
+    output << "===================================================================" << endl << endl;
     writeMap(matrix, output);
     output << "Subida de encosta pelo maior aclive" << endl;
     if constexpr (is_same_v<decltype(compare(start, finish)), double>) {
@@ -125,20 +137,25 @@ void subidaEncostaMaiorAclive(vector<vector<int>> matrix, pair<int, int> start, 
     }
     output << "Estados gerados: " << gerados << endl;
     output << "Estados visitados: " << visitados << endl;
-    output << "Custo do caminho: " << custo << endl << endl; 
+    output << "Custo do caminho: " << custo << endl <<"==================================================================="<<endl << endl << endl << endl << endl; 
 }
 
 template <typename heuristic>
-void subidaEncostaEstocastico(vector<vector<int>> matrix, pair<int, int> start, pair<int, int> finish, heuristic compare, ofstream& output) {
+void subidaEncostaEstocastico(vector<vector<int>> matrix, pair<int, int> start, pair<int, int> finish, heuristic compare, ofstream& output,
+                              int& saida_gerados, int& saida_visitados, int& saida_custo, bool& saida_achou) {
     queue<pair<int,int>> fila;
     int custo = 0, gerados = 1, visitados = 0;
+    bool achou = false;
     fila.push(start);
     while(!fila.empty()) {
         vector<pair<int,int>> vizinhos;
         custo += matrix[fila.front().first][fila.front().second];
         visitados += 1;
         matrix[fila.front().first][fila.front().second] = 1;
-        if(fila.front() == finish) break;
+        if(fila.front() == finish) {
+            achou = true;
+            break;
+        }
 
         if(fila.front().first - 1 > -1 && compare(fila.front(), finish) > compare({fila.front().first-1, fila.front().second}, finish) && matrix[fila.front().first-1][fila.front().second] > 1) {
             gerados += 1;
@@ -170,6 +187,12 @@ void subidaEncostaEstocastico(vector<vector<int>> matrix, pair<int, int> start, 
         fila.pop();
     }
 
+    saida_gerados = gerados;
+    saida_visitados = visitados;
+    saida_custo = custo;
+    saida_achou = achou;
+    
+    output << "===================================================================" << endl << endl;
     writeMap(matrix, output);
     output << "Subida de encosta estocástica" << endl;
     if constexpr (is_same_v<decltype(compare(start, finish)), double>) {
@@ -179,7 +202,7 @@ void subidaEncostaEstocastico(vector<vector<int>> matrix, pair<int, int> start, 
     }
     output << "Estados gerados: " << gerados << endl;
     output << "Estados visitados: " << visitados << endl;
-    output << "Custo do caminho: " << custo << endl << endl; 
+    output << "Custo do caminho: " << custo << endl <<"==================================================================="<<endl << endl << endl << endl << endl; 
 }
 
 

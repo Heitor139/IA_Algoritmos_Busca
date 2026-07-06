@@ -82,7 +82,10 @@ void buscaGulosa(vector<vector<int>> matrix, pair<int,int> start, pair<int,int> 
     if(achou) {
         pair<int,int> coordenada_atual = finish;
         while(coordenada_atual != make_pair(-1, -1)) {
-            custo += custos[coordenada_atual.first][coordenada_atual.second];
+            // soma o custo do caminho encontrado, mas não soma o custo do estado inicial
+            if(coordenada_atual != start){
+                custo += custos[coordenada_atual.first][coordenada_atual.second];
+            }
             coordenada_atual = caminho[coordenada_atual];
         }
     }
@@ -92,6 +95,7 @@ void buscaGulosa(vector<vector<int>> matrix, pair<int,int> start, pair<int,int> 
     saida_custo = custo;
     saida_achou = achou;
 
+    output << "===================================================================" << endl << endl;
     writeMap(matrix, output);
     output << "Busca Gulosa" << endl;
     if constexpr (is_same_v<decltype(compare(start, finish)), double>) {
@@ -101,7 +105,7 @@ void buscaGulosa(vector<vector<int>> matrix, pair<int,int> start, pair<int,int> 
     }
     output << "Estados gerados: "   << gerados   << endl;
     output << "Estados visitados: " << visitados << endl;
-    output << "Custo do caminho: " << custo << endl;
+    output << "Custo do caminho: " << custo << endl << "===================================================================" << endl<< endl << endl << endl << endl;
 }
 
 #endif // GREEDY_SEARCH_H

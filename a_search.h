@@ -91,6 +91,7 @@ void aStar(vector<vector<int>> matrix, pair<int,int> start, pair<int,int> finish
     saida_custo = custo;
     saida_achou = achou;
 
+    output << "===================================================================" << endl << endl;
     writeMap(matrix, output);
     output << "A*" << endl;
     if constexpr (is_same_v<decltype(compare(start, finish)), double>) {
@@ -100,11 +101,12 @@ void aStar(vector<vector<int>> matrix, pair<int,int> start, pair<int,int> finish
     }
     output << "Estados gerados: "   << gerados   << endl;
     output << "Estados visitados: " << visitados << endl;
-    output << "Custo do caminho: " << custo << endl;
+    output << "Custo do caminho: " << custo <<endl << "===================================================================" << endl<< endl << endl << endl << endl;
 }
 
 template <typename heuristic>
-void weightedAStar(vector<vector<int>> matrix, pair<int,int> start, pair<int,int> finish, heuristic compare, double weight, ofstream& output) {
+void weightedAStar(vector<vector<int>> matrix, pair<int,int> start, pair<int,int> finish, heuristic compare, double weight, ofstream& output,
+    int& saida_gerados, int& saida_visitados, int& saida_custo, bool& saida_achou) {
     // fila de prioridade: sempre remove o nó com menor f(n) = g(n) + h(n).
     priority_queue<pair<double, pair<pair<int,int>, pair<int,int>>>, vector<pair<double, pair<pair<int,int>, pair<int,int>>>>, greater<pair<double, pair<pair<int,int>, pair<int,int>>>>> fila;
 
@@ -177,6 +179,12 @@ void weightedAStar(vector<vector<int>> matrix, pair<int,int> start, pair<int,int
 
     if(achou) custo = (int)g[finish];
 
+    saida_gerados = gerados;
+    saida_visitados = visitados;
+    saida_custo = custo;
+    saida_achou = achou;
+
+    output << "===================================================================" << endl << endl;
     writeMap(matrix, output);
     output << "Weighted A*" << endl;
     output << "Peso: " << weight << endl;
@@ -187,7 +195,7 @@ void weightedAStar(vector<vector<int>> matrix, pair<int,int> start, pair<int,int
     }
     output << "Estados gerados: "   << gerados   << endl;
     output << "Estados visitados: " << visitados << endl;
-    output << "Custo do caminho: " << custo << endl;
+    output << "Custo do caminho: " << custo <<endl << "===================================================================" << endl<< endl << endl << endl << endl;
 }
 
 #endif // A_SEARCH_H
