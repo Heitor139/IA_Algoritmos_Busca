@@ -102,7 +102,10 @@ void buscaGulosa(vector<vector<int>> matrix, pair<int,int> start, pair<int,int> 
     }
     output << "Estados gerados: "   << gerados   << endl;
     output << "Estados visitados: " << visitados << endl;
-    output << "Custo do caminho: " << custo << endl << "===================================================================" << endl<< endl << endl << endl << endl;
+    output << "Custo do caminho: " << custo << endl;
+    if(achou) output << "Sucesso" << endl;
+    else output << "Falha" << endl;
+    output << "===================================================================" << endl<< endl << endl << endl << endl;
 }
 
 #endif // GREEDY_SEARCH_H

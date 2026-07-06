@@ -60,7 +60,10 @@ void subidaEncostaGulosa(vector<vector<int>> matrix, pair<int, int> start, pair<
     }
     output << "Estados gerados: " << gerados << endl;
     output << "Estados visitados: " << visitados << endl;
-    output << "Custo do caminho: " << custo << endl <<"==================================================================="<<endl << endl << endl << endl << endl; 
+    output << "Custo do caminho: " << custo << endl;
+    if(achou) output << "Sucesso" << endl;
+    else output << "Falha" << endl;
+    output << "==================================================================="<<endl << endl << endl << endl << endl; 
 }
 
 template <typename heuristic>
@@ -137,7 +140,10 @@ void subidaEncostaMaiorAclive(vector<vector<int>> matrix, pair<int, int> start, 
     }
     output << "Estados gerados: " << gerados << endl;
     output << "Estados visitados: " << visitados << endl;
-    output << "Custo do caminho: " << custo << endl <<"==================================================================="<<endl << endl << endl << endl << endl; 
+    output << "Custo do caminho: " << custo << endl;
+    if(achou) output << "Sucesso" << endl;
+    else output << "Falha" << endl;
+    output << "==================================================================="<<endl << endl << endl << endl << endl; 
 }
 
 template <typename heuristic>
@@ -202,7 +208,10 @@ void subidaEncostaEstocastico(vector<vector<int>> matrix, pair<int, int> start, 
     }
     output << "Estados gerados: " << gerados << endl;
     output << "Estados visitados: " << visitados << endl;
-    output << "Custo do caminho: " << custo << endl <<"==================================================================="<<endl << endl << endl << endl << endl; 
+    output << "Custo do caminho: " << custo << endl;
+    if(achou) output << "Sucesso" << endl;
+    else output << "Falha" << endl;
+    output << "==================================================================="<<endl << endl << endl << endl << endl; 
 }
 
 
