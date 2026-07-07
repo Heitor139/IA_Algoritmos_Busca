@@ -95,16 +95,20 @@ void buscaGulosa(vector<vector<int>> matrix, pair<int,int> start, pair<int,int> 
     output << "===================================================================" << endl << endl;
     writeMap(matrix, output);
     output << "Busca Gulosa" << endl;
+
     if constexpr (is_same_v<decltype(compare(start, finish)), double>) {
         output << "Distancia Euclidiana" << endl;
     } else {
         output << "Distancia Manhattan" << endl;
     }
+
     output << "Estados gerados: "   << gerados   << endl;
     output << "Estados visitados: " << visitados << endl;
     output << "Custo do caminho: " << custo << endl;
+
     if(achou) output << "Sucesso" << endl;
     else output << "Falha" << endl;
+    
     output << "===================================================================" << endl<< endl << endl << endl << endl;
 }
 
