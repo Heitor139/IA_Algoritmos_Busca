@@ -11,7 +11,7 @@
 using namespace std;
 
 int main() {
-    vector<vector<int>> matrix(15, vector<int> (15));
+    vector<vector<int>> matrix(15, vector<int> (15)); //Inicialização do grid
     double obstacles = 0;
     int saida_gerados = 0;
     int saida_visitados = 0;
